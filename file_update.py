@@ -23,12 +23,13 @@ def update_file_hashes(repo_dir, json_path):
             if file not in file_hashes or file_hashes[file]['hash'] != new_hash:
                 # Hash has changed, update it and create a document
                 logger.info("some hash changed")
-                logger.info("full_file_path:", full_file_path)
+                logger.info("full_file_path: %s", full_file_path)
                 file_hashes[file] = {'hash': new_hash}
                 raw_documents = create_documents_for_file(full_file_path)
 
                 documents = [document.to_json() for document in raw_documents]
                 for document in documents:
+
 
                     document['embedding'] = get_embedding_for_document(document)
 
